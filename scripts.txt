@@ -1,0 +1,9 @@
+python train.py --name ADE20K_model --dataroot ./datasets/ADE20K/ --label_nc 151 --loadSize 256 --resize_or_crop resize --batchSize 8
+
+python train.py --name cityscapes_model --dataroot ./datasets/cityscapes/ --label_nc 35 --loadSize 1024 resize_or_crop scale_width --batchSize 2
+
+python test.py --name ADE20K_model --dataroot ./datasets/ADE20K/ --label_nc 151 --resize_or_crop none --batchSize 1 --how_many 50
+
+python test.py --name ADE20K_model --dataroot ./datasets/Kodak/ --label_nc 151 --resize_or_crop none --batchSize 1 --how_many 24
+
+python test.py --name CompSegFeatVggSSIML1 --dataroot ./datasets/cityscapes/ --label_nc 35 --loadSize 1024 --resize_or_crop scale_width --batchSize 1 --how_many 50
