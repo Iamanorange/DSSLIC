@@ -7,7 +7,7 @@ Paper: https://arxiv.org/abs/1806.03348
 # ADE20K Dataset
 python train.py --name ADE20K_model --dataroot ./datasets/ADE20K/ --label_nc 151 --loadSize 256 --resize_or_crop resize --batchSize 8
 # Cityscapes Dataset
-python train.py --name cityscapes_model --dataroot ./datasets/cityscapes/ --label_nc 35 --loadSize 1024 resize_or_crop scale_width --batchSize 2
+python train.py --name cityscapes_model --dataroot ./datasets/cityscapes/ --label_nc 35 --loadSize 1024 --resize_or_crop scale_width --batchSize 2
 
 ## Testing
 # ADE20K testset
