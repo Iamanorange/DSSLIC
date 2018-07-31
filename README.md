@@ -1,5 +1,6 @@
 # DSSLIC
 DSSLIC: Deep Semantic Segmentation-based Layered Image Compression
+
 Paper: https://arxiv.org/abs/1806.03348
 
 ## Training
