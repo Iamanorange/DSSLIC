@@ -1,5 +1,5 @@
 # DSSLIC
-DSSLIC: Deep Semantic Segmentation-based Layered Image Compression
+Pytorch implmementation of DSSLIC: Deep Semantic Segmentation-based Layered Image Compression
 
 Paper: https://arxiv.org/abs/1806.03348
 
