@@ -26,8 +26,8 @@ def make_dataset(dir, opt):
         for fname in fnames:
             if is_image_file(fname):
                 path = os.path.join(root, fname)
-        if ((opt.phase=='test')or(opt.phase=='train')and min(Image.open(path).size) >= 512):
-                images.append(path)        
+                if ((opt.phase=='test') or (opt.phase=='train') and min(Image.open(path).size) >= 512):
+                    images.append(path)        
     return images
 
 
