@@ -72,7 +72,7 @@ class AlignedDataset(BaseDataset):
         
         ds = 0
         if self.opt.comp_type=='ds':
-          ds = image2.resize((image2.size[0]/self.opt.alpha,image2.size[1]/self.opt.alpha), Image.ANTIALIAS)        
+          ds = image2.resize((image2.size[0]//self.opt.alpha, image2.size[1]//self.opt.alpha), Image.LANCZOS)
           ds = ds.resize((image2.size[0],image2.size[1]), Image.ANTIALIAS)          
           ds_tensor = transform_image(ds)          
                 
