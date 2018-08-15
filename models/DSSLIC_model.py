@@ -216,6 +216,7 @@ class DSSLICModel(BaseModel):
     def inference(self, real, flabel, ds):
         # Encode Inputs                
         input_flabel, real_image, ds = self.encode_input(flabel_map=Variable(flabel), real_image=Variable(real), ds_image=Variable(ds), infer=True)
+        start_time = time.time()
 
         # input to G: DS or compG output
         if self.opt.comp_type=='compG': # use compG
@@ -229,7 +230,6 @@ class DSSLICModel(BaseModel):
             input_flabel = input_flabel.cpu()            
             real_image = real_image.cpu()
 
-          start_time = time.time()
           comp_image = self.compG.forward(compG_input)
           print("--- CompNet: %s seconds ---" % (time.time() - start_time))          
                                 
