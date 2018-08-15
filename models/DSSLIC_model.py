@@ -114,7 +114,7 @@ class DSSLICModel(BaseModel):
                 input_flabel = input_flabel.scatter_(1, flabel_map.data.long().cuda(), 1.0)            
             
         if flabel_map is not None:
-          input_flabel = Variable(input_flabel, volatile=infer)
+            input_flabel = Variable(input_flabel)
 
         # real images for training
         if real_image is not None:
@@ -126,9 +126,9 @@ class DSSLICModel(BaseModel):
 
     def discriminate(self, input_label, test_image, use_pool=False):
         if input_label is not None:
-          input_concat = torch.cat((input_label, test_image.detach()), dim=1)
+            input_concat = torch.cat((input_label, test_image.detach()), dim=1)
         else:
-          input_concat = test_image.detach()
+            input_concat = test_image.detach()
         if use_pool:            
             fake_query = self.fake_pool.query(input_concat)
             return self.netD.forward(fake_query)
