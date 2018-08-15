@@ -11,7 +11,9 @@ from util import html
 import time
 
 from torch.autograd import Variable
-from models.psp_net import *
+
+# No module named 'models.psp_net'
+#from models.psp_net import *
 
 opt = TestOptions().parse(save=False)
 opt.nThreads = 1   # test code only supports nThreads = 1
@@ -33,12 +35,12 @@ for i, data in enumerate(dataset):
         break
              
     start_time = time.time()
-    generated , res, comp_image, up_image = model.inference(data['image'],data['label'], data['ds'])
+    generated, res, comp_image, up_image = model.inference(data['image'],data['label'], data['ds'])
     print("--- %s seconds ---" % (time.time() - start_time))
     visuals = OrderedDict([
-      ('input_label', util.tensor2label(data['label'][0], opt.label_nc)),                           
+                           ('input_label', util.tensor2label(data['label'][0], opt.label_nc)),                           
                            ('synthesized_image', util.tensor2im(generated.data[0])),
-			   ('comp_image', util.tensor2im(comp_image.data[0])),
+                           ('comp_image', util.tensor2im(comp_image.data[0])),
                            ('fine_image', util.tensor2im(res.data[0])),
                            ('real_image', util.tensor2im(data['image'][0])),
                            ('up_image', util.tensor2im(up_image.data[0]))

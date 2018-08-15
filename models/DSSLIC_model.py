@@ -9,7 +9,7 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 from PIL import Image
-import pytorch_msssim
+from models import pytorch_msssim
 import util.util as util
 import os
 import time
@@ -265,7 +265,7 @@ class DSSLICModel(BaseModel):
         return fake_image, res_image, comp_image, up_image
 
     def save(self, which_epoch):
-    self.save_network(self.compG, 'C', which_epoch, self.gpu_ids)
+        self.save_network(self.compG, 'C', which_epoch, self.gpu_ids)
         self.save_network(self.netG, 'G', which_epoch, self.gpu_ids)        
         self.save_network(self.netD, 'D', which_epoch, self.gpu_ids)
 
