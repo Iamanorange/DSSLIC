@@ -3,6 +3,12 @@ Pytorch implmementation of DSSLIC: Deep Semantic Segmentation-based Layered Imag
 
 Paper: https://arxiv.org/abs/1806.03348
 
+# Requirements: 
+- Ubuntu 16.04
+- Python 2.7
+- Cuda 8.0
+- Pyorch 0.3.0
+
 ## Training
 # ADE20K Dataset
 python train.py --name ADE20K_model --dataroot ./datasets/ADE20K/ --label_nc 151 --loadSize 256 --resize_or_crop resize --batchSize 8
