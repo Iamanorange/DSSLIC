@@ -11,7 +11,6 @@ from util import html
 import time
 
 from torch.autograd import Variable
-from models.psp_net import *
 
 opt = TestOptions().parse(save=False)
 opt.nThreads = 1   # test code only supports nThreads = 1
