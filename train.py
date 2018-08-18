@@ -12,7 +12,7 @@ import os
 import numpy as np
 import torch
 from torch.autograd import Variable
-from StringIO import StringIO
+from io import StringIO
 import scipy.misc
 
 opt = TrainOptions().parse()
