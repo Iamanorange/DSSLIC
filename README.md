@@ -3,11 +3,17 @@ Pytorch implmementation of DSSLIC: Deep Semantic Segmentation-based Layered Imag
 
 Paper: https://arxiv.org/abs/1806.03348
 
-## Requirements: 
+## Original Requirements: 
 - Ubuntu 16.04
 - Python 2.7
 - Cuda 8.0
 - Pyorch 0.3.0
+
+## My Environments:
+- Ubuntu 16.04
+- Python 3.5
+- Cuda 9.0
+- Pytorch 0.4.1
 
 # Training
 ## ADE20K Dataset
