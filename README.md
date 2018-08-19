@@ -38,4 +38,4 @@ python3 test.py --name ADE20K_model --dataroot ./datasets/ADE20K/ --label_nc 151
 python3 test.py --name ADE20K_model --dataroot ./datasets/Kodak/ --label_nc 151 --loadSize 384 --resize_or_crop resize --batchSize 1 --how_many 24
 
 ## Cityscapes testset
-python3 test.py --name Cityscapes_model --dataroot ./datasets/cityscapes/ --label_nc 35 --loadSize 512 --resize_or_crop scale_width --batchSize 1 --how_many 50
+python3 test.py --name Cityscapes_model --dataroot ./datasets/cityscapes/ --label_nc 35 --loadSize 1536 --resize_or_crop scale_width --batchSize 1 --how_many 50
