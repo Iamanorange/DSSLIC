@@ -1,6 +1,7 @@
 ### Copyright (C) 2017 NVIDIA Corporation. All rights reserved.
 ### Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
 import os
+import time
 from collections import OrderedDict
 from options.test_options import TestOptions
 from data.data_loader import CreateDataLoader
@@ -8,10 +9,6 @@ from models.models import create_model
 import util.util as util
 from util.visualizer import Visualizer
 from util import html
-import time
-
-# No module named 'models.psp_net'
-#from models.psp_net import *
 
 
 def main():
@@ -54,3 +51,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
