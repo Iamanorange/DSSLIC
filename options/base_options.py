@@ -23,13 +23,16 @@ class BaseOptions():
         self.parser.add_argument('--alpha', type=int, default=8, help='alpha downsample factor')        
         self.parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
         self.parser.add_argument('--loadSize', type=int, default=256, help='scale images to this size')
+        self.parser.add_argument('--width', type=int, default=256, help='scale images to this width')
+        self.parser.add_argument('--height', type=int, default=256, help='scale images to this height')
+        self.parser.add_argument('--threshold', type=int, default=524288, help='max resolution')
         self.parser.add_argument('--fineSize', type=int, default=256, help='then crop to this size')
         self.parser.add_argument('--label_nc', type=int, default=151, help='# of input image channels (151 for ADE20K, 35 for Cityscapes')
         self.parser.add_argument('--output_nc', type=int, default=3, help='# of output image channels')
 
         # for setting inputs
         self.parser.add_argument('--dataroot', type=str, default='./datasets/ADE20K/') 
-        self.parser.add_argument('--resize_or_crop', type=str, default='resize', help='scaling and cropping of images at load time [resize_and_crop|crop|scale_width|scale_width_and_crop]')
+        self.parser.add_argument('--resize_or_crop', type=str, default='auto', help='scaling and cropping of images at load time [resize_and_crop|crop|scale_width|scale_width_and_crop|resize_w_h|auto]')
         self.parser.add_argument('--serial_batches', action='store_true', help='if true, takes images in order to make batches, otherwise takes them randomly')        
         self.parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the images for data argumentation') 
         self.parser.add_argument('--nThreads', default=2, type=int, help='# threads for loading data')                

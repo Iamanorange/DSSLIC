@@ -11,7 +11,7 @@ class BaseDataset(data.Dataset):
         super(BaseDataset, self).__init__()
 
     @classmethod
-    def name(self):
+    def name(cls):
         return 'BaseDataset'
 
     def initialize(self, opt):
@@ -40,20 +40,30 @@ def get_params(opt, size):
 
 def get_transform(opt, params, method=Image.BICUBIC, normalize=True):
     transform_list = []
-    if 'resize' in opt.resize_or_crop:
-        osize = [opt.loadSize, opt.loadSize]
-        transform_list.append(transforms.Resize(osize, method))
-    elif 'scale_width' in opt.resize_or_crop:
-        transform_list.append(transforms.Lambda(lambda img: __scale_width(img, opt.loadSize, method)))
-
-    # scale_width_power2
-    if 'scale_width_p2' in opt.resize_or_crop:
-        transform_list.append(transforms.Lambda(lambda img: __scale_width(img, opt.loadSize, method)))
+    if 'auto' in opt.resize_or_crop:
+        transform_list.append(transforms.Lambda(
+            lambda img: __auto_resize(img, opt.threshold / opt.batchSize, method)))
         base = float(2 ** opt.n_downsample_global)
         transform_list.append(transforms.Lambda(lambda img: __make_power_2(img, base, method)))
+    elif 'resize_w_h' in opt.resize_or_crop:
+        osize = [opt.width, opt.height]
+        transform_list.append(transforms.Resize(osize, method))
+    elif 'resize' in opt.resize_or_crop:
+        osize = [opt.loadSize, opt.loadSize]
+        transform_list.append(transforms.Resize(osize, method))
+    elif 'scale_width_p2' in opt.resize_or_crop:
+        transform_list.append(transforms.Lambda(
+            lambda img: __scale_width(img, opt.loadSize, method)))
+        base = float(2 ** opt.n_downsample_global)
+        transform_list.append(transforms.Lambda(
+            lambda img: __make_power_2(img, base, method)))
+    elif 'scale_width' in opt.resize_or_crop:
+        transform_list.append(transforms.Lambda(
+            lambda img: __scale_width(img, opt.loadSize, method)))
 
     if 'crop' in opt.resize_or_crop:
-        transform_list.append(transforms.Lambda(lambda img: __crop(img, params['crop_pos'], opt.fineSize)))
+        transform_list.append(transforms.Lambda(
+            lambda img: __crop(img, params['crop_pos'], opt.fineSize)))
 
     if opt.resize_or_crop == 'none':
         base = float(2 ** opt.n_downsample_global)
@@ -64,16 +74,26 @@ def get_transform(opt, params, method=Image.BICUBIC, normalize=True):
     if opt.isTrain and not opt.no_flip:
         transform_list.append(transforms.Lambda(lambda img: __flip(img, params['flip'])))
 
-    transform_list += [transforms.ToTensor()]
+    transform_list.append(transforms.ToTensor())
 
     if normalize:
-        transform_list += [transforms.Normalize((0.5, 0.5, 0.5),
-                                                (0.5, 0.5, 0.5))]
+        transform_list.append(transforms.Normalize((0.5, 0.5, 0.5),
+                                                   (0.5, 0.5, 0.5)))
     return transforms.Compose(transform_list)
 
 
 def normalize():
     return transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+
+
+def __auto_resize(img, threshold, method=Image.BICUBIC):
+    ow, oh = img.size
+    if ow * oh > threshold:
+        factor = (threshold / (ow * oh)) ** 0.5
+        w = int(ow * factor)
+        h = int(oh * factor)
+        return img.resize((w, h), method)
+    return img
 
 
 def __make_power_2(img, base, method=Image.BICUBIC):
