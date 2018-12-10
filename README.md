@@ -22,12 +22,12 @@ Paper: https://arxiv.org/abs/1806.03348
 ## ADE20K Dataset
 python3 train.py --name ADE20K_model --dataroot ./datasets/ADE20K/ --label_nc 151 --loadSize 256 --resize_or_crop resize --batchSize 2
 
-This takes ~7 seconds per epoch on my system.
+This takes ~0.14 seconds per resized image on my system.
 
 ## Cityscapes Dataset
 python3 train.py --name Cityscapes_model --dataroot ./datasets/cityscapes/ --label_nc 35 --loadSize 512 --resize_or_crop scale_width --batchSize 1
 
-This take ~30 seconds per epoch on my system.
+This take ~0.6 seconds per resized image on my system.
 
 # Testing
 
